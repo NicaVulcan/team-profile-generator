@@ -1,5 +1,4 @@
 const inquirer = require("inquirer");
-const Employee = require("../lib/Employee");
 const Manager = require("../lib/Manager");
 const Engineer = require("../lib/Engineer");
 const Intern = require("../lib/Intern");
@@ -52,7 +51,6 @@ const questions = [
     }
 ];
 
-
 const managerQ = {
     type: "input",
     name: "office",
@@ -89,7 +87,7 @@ const engineerQ = {
 
 const internQ = {
     type: "input",
-    name: "github",
+    name: "school",
     message: "School Name:",
     validate: githubInput => {
         if (githubInput) {
@@ -101,10 +99,42 @@ const internQ = {
     }
 };
 
-const enterEmployee = (questionArr) => {
+const enterManager = () => {
+    let manQArr = [...questions];
+    manQArr.push(managerQ);
     return inquirer
-        .prompt(questionArr);
-};
+        .prompt(manQArr)
+        .then(details => {
+            const manager = new Manager(details.name, details.id, details.email, details.office);
+            console.table(manager)
+            employeeRoster.push(manager);
+            addEmployee();
+        })
+}
+const enterEngineer = () => {
+    let engQArr = [...questions];
+    engQArr.push(engineerQ);
+    return inquirer
+        .prompt(engQArr)
+        .then(details => {
+            const engineer = new Engineer(details.name, details.id, details.email, details.github);
+            console.table(engineer)
+            employeeRoster.push(engineer);
+            addEmployee();
+        })
+}
+const enterIntern = () => {
+    let intQArr = [...questions];
+    intQArr.push(internQ);
+    return inquirer
+        .prompt(intQArr)
+        .then(details => {
+            const intern = new Intern(details.name, details.id, details.email,  details.school);
+            console.table(intern)
+            employeeRoster.push(intern);
+            addEmployee();
+        })
+}
 
 const generateHTML = () => {
     console.log("this will generate a new HTML file");
@@ -123,18 +153,16 @@ const addEmployee = () => {
         .then(answer => {
             switch (answer.chooseAdd) {
                 case "Add a Manager":
-                    questions.push(managerQ);
-                    enterEmployee(questions);
+                    enterManager();
                     break;
                 case "Add an Engineer":
-                    questions.push(engineerQ);
-                    enterEmployee(questions);
+                    enterEngineer();
                     break;
                 case "Add an Intern":
-                    questions.push(internQ);
-                    enterEmployee(questions);
+                    enterIntern();
                     break;
                 case "Generate HTML":
+                    console.table(employeeRoster);
                     generateHTML();
                     break;
             }
