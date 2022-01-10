@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
-const Manager = require("../lib/Manager");
-const Engineer = require("../lib/Engineer");
-const Intern = require("../lib/Intern");
+const generateHTML = require("./page-template");
+const { writeFile, copyFile } = require("./create-file");
 const employeeRoster = [];
 
 const questions = [
@@ -105,10 +104,10 @@ const enterManager = () => {
     return inquirer
         .prompt(manQArr)
         .then(details => {
-            const manager = new Manager(details.name, details.id, details.email, details.office);
-            console.table(manager)
-            employeeRoster.push(manager);
-            addEmployee();
+            const managerObj = details;
+            console.table(managerObj)
+            employeeRoster.push(managerObj);
+            employeePrompts();
         })
 }
 const enterEngineer = () => {
@@ -117,10 +116,10 @@ const enterEngineer = () => {
     return inquirer
         .prompt(engQArr)
         .then(details => {
-            const engineer = new Engineer(details.name, details.id, details.email, details.github);
-            console.table(engineer)
-            employeeRoster.push(engineer);
-            addEmployee();
+            const engineerObj = details;
+            console.table(engineerObj)
+            employeeRoster.push(engineerObj);
+            employeePrompts();
         })
 }
 const enterIntern = () => {
@@ -129,18 +128,20 @@ const enterIntern = () => {
     return inquirer
         .prompt(intQArr)
         .then(details => {
-            const intern = new Intern(details.name, details.id, details.email,  details.school);
-            console.table(intern)
-            employeeRoster.push(intern);
-            addEmployee();
+            const internObj = details;
+            console.table(internObj)
+            employeeRoster.push(internObj);
+            employeePrompts();
         })
 }
 
-const generateHTML = () => {
-    console.log("this will generate a new HTML file");
+const readyEmployee = () => {
+    console.log("You have entered the following employees:")
+    console.table(employeeRoster);
+    return generateHTML(employeeRoster);
 };
 
-const addEmployee = () => {
+const employeePrompts = () => {
     return inquirer
         .prompt([
             {
@@ -151,26 +152,19 @@ const addEmployee = () => {
             }
         ])
         .then(answer => {
-            switch (answer.chooseAdd) {
-                case "Add a Manager":
-                    enterManager();
-                    break;
-                case "Add an Engineer":
-                    enterEngineer();
-                    break;
-                case "Add an Intern":
-                    enterIntern();
-                    break;
-                case "Generate HTML":
-                    console.table(employeeRoster);
-                    generateHTML();
-                    break;
+            if (answer.chooseAdd === "Add a Manager") {
+                return enterManager();
+            } else if (answer.chooseAdd === "Add an Engineer") {
+                return enterEngineer();
+            } else if (answer.chooseAdd === "Add an Intern") {
+                return enterIntern();
+            } else {
+                return readyEmployee();
             }
-        })
-        ;
+        });
 }
+module.exports = employeePrompts;
 
-addEmployee();
 
 
 
