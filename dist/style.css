@@ -1,0 +1,81 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    background-color: rgb(24, 83, 24);
+    height: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: gold;
+    font-size: 40px;
+}
+section {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.employee-card {
+    border: black solid 1px;
+    border-radius: 10px;
+    padding: 15px 10px;
+    margin: 8px;
+    flex-basis: 100%;
+    transition-duration: 200ms;
+}
+.employee-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 3px grey;
+}
+.employee-card h2,
+.employee-card h3 {
+    text-align: center;
+}
+
+.employee-card hr {
+    margin: 10px;
+}
+.employee-card ul {
+    list-style: none;
+    padding: 10px 5px;
+}
+.employee-card a {
+    text-decoration: none;
+    color: rgb(75, 33, 153);
+}
+.employee-card a:hover {
+    color: rgb(40, 143, 143);
+}
+footer {
+    width: 100%;
+    background-color: rgb(24, 83, 24);
+    margin-top: auto;
+    width: 100%;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gold;
+}
+
+@media screen and (min-width: 575px) {
+    .employee-card {
+        flex-basis: 60%;
+    }
+}
+  @media screen and (min-width: 768px) {
+    .employee-card {
+        flex-basis: 230px;
+    }
+}
