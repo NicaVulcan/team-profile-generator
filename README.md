@@ -12,20 +12,29 @@ To install this application, the following steps must be taken:
 1. Install Node.js
 2. Clone this repository
 3. Access repository directory through terminal
-4. Install Inquirer by typing the following into the terminal: 
+4. Install Inquirer: 
 ```
 npm install inquirer
 ```
 ## Usage
-1. From the repository directory, in the terminal, type the following:
+1. Run the application with:
 ```
 node index.js
 ```
 2. Answer the prompts
-3. Access your newly created HTML and accompanying CSS files in the 'dist' directory
+3. Access your newly created HTML and accompanying CSS files in the 'dist/' directory
 ## Tests
-_Tests coming soon!_
+1. install Jest:
+```
+npm install jest
+```
+2. Run tests: 
+```
+npm run test
+```
 ## Walkthrough
-_Walktthrough video coming soon!_
+Please click on the image to be redirected to a walkthrough video
+
+[![Walkthrough Video](images/team-profile-gen.png)](https://drive.google.com/file/d/1WBJzrtLSR_jEw93hcJDpdMRfLX8_QlTh/view?usp=sharing)
 ## Contribution
 Created by CSM
